@@ -19,19 +19,4 @@ class Room extends Model
         'hotel_id',
     ];
 
-    public function hotel()
-    {
-        return $this->belongsTo(Hotel::class);
-    }
-
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class);
-    }
-
-    public function facilities()
-    {
-        return $this->belongsTo(Facility::class);
-    }
-
 }

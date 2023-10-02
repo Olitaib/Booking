@@ -13,14 +13,4 @@ class Facility extends Model
         'title'
     ];
 
-    public function rooms()
-    {
-        return $this->belongsTo(Room::class);
-    }
-
-    public function hotels()
-    {
-        return $this->belongsTo(Hotel::class);
-    }
-
 }
