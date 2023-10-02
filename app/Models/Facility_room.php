@@ -14,4 +14,14 @@ class Facility_room extends Model
         'room_id'
     ];
 
+    public function facilities()
+    {
+        return $this->belongsTo(Facility::class);
+    }
+
+    public function rooms()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
 }
