@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="pt-2">
-            <span class="text-2xl text-grey-darkest">₽{{ $hotel->price }}</span>
+            <span class="text-2xl text-grey-darkest">от {{ $hotel->rooms->min('price') }}р.</span>
             <span class="text-lg"> за ночь</span>
         </div>
         @if($hotel->facilities->isNotEmpty())
