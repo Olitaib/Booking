@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use Illuminate\View\View;
@@ -39,4 +40,15 @@ class BookingController extends Controller
 
         return redirect('bookings');
     }
+
+    public function remove(Request $request)
+    {
+
+        $booking = Booking::find($request->booking_id);
+        $booking->delete();
+        var_dump($booking);
+
+        return redirect('bookings');
+    }
+
 }

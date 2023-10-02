@@ -27,6 +27,11 @@
                 </div>
             </div>
             <x-bookings.booking-card :booking="$booking"></x-bookings.booking-card>
+                <form class="ml-4" method="POST" action="{{ route('bookings.remove') }}">
+                    @csrf
+                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                    <x-the-button class=" h-full w-full">{{ __('Отменить') }}</x-the-button>
+                </form>
         </div>
     </div>
 </x-app-layout>
