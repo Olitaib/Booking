@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingCanceled;
+use App\Mail\BookingCompleted;
 use App\Models\Room;
 use Carbon\Carbon;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class BookingController extends Controller
@@ -28,8 +31,7 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-
-        Booking::create([
+        $booking = Booking::create([
             'user_id' => auth()->id(),
             'room_id' => $request->room_id,
             'started_at' => $request->started_at,
@@ -38,15 +40,17 @@ class BookingController extends Controller
             'price' => $days * Room::find($request->room_id)->price,
         ]);
 
+        Mail::to(Auth::user()->email)->send(new BookingCompleted($booking));
+
         return redirect('bookings');
     }
 
     public function remove(Request $request)
     {
-
         $booking = Booking::find($request->booking_id);
         $booking->delete();
-        var_dump($booking);
+
+        Mail::to(Auth::user()->email)->send(new BookingCanceled($booking));
 
         return redirect('bookings');
     }
