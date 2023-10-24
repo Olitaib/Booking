@@ -42,7 +42,7 @@
             </form>
             @if($startDate && $endDate)
                 <div class="flex flex-col w-full lg:w-4/5">
-                    @foreach($hotel->rooms as $room)
+                    @foreach($hotel->availableRooms($startDate, $endDate) as $room)
                             <x-rooms.room-list-item :room="$room" class="mb-4"/>
                     @endforeach
                 </div>
