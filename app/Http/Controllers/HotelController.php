@@ -19,8 +19,13 @@ class HotelController extends Controller
     public function show(Request $request): View
     {
         $hotel = Hotel::find($request['id']);
+        $rooms = [];
 
-        return view('hotels.show', ['hotel' => $hotel]);
+        if (($request['start_date'])) {
+            $rooms = $hotel->filterRooms($request['start_date'], $request['end_date'], $request['filters']);
+        }
+
+        return view('hotels.show', ['hotel' => $hotel, 'rooms' => $rooms]);
     }
 
 }
