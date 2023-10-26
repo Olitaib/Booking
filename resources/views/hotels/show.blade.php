@@ -35,6 +35,14 @@
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5">
                         </div>
                     </div>
+                    <div class="flex">
+                        @foreach($hotel->roomFacilities() as $facility)
+                        <div class="mx-4">
+                            <label for="{{$facility->id}}">{{$facility->title}}</label>
+                            <input type="checkbox" name="filters[]" value="{{$facility->id}}">
+                        </div>
+                        @endforeach
+                    </div>
                     <div>
                         <x-the-button type="submit" class=" h-full w-full">Загрузить номера</x-the-button>
                     </div>
@@ -42,7 +50,7 @@
             </form>
             @if($startDate && $endDate)
                 <div class="flex flex-col w-full lg:w-4/5">
-                    @foreach($hotel->rooms as $room)
+                    @foreach($rooms as $room)
                             <x-rooms.room-list-item :room="$room" class="mb-4"/>
                     @endforeach
                 </div>
