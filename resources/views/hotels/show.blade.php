@@ -18,9 +18,17 @@
             </div>
         </div>
         <div class="flex flex-col">
-            <div class="text-2xl text-center md:text-start font-bold">Забронировать комнату</div>
-
+            <div class="text-3xl text-center md:text-start font-bold">Забронировать комнату</div>
             <form method="get" action="{{ url()->current() }}">
+                <div class="flex my-6">
+                    <div class="text-xl ">Удобства:</div>
+                    <div>
+                        @foreach($hotel->roomFacilities() as $facility)
+                                <input class="ml-4" type="checkbox" name="filters[]" value="{{$facility->id}}">
+                                <label for="{{$facility->id}}">{{$facility->title}}</label>
+                        @endforeach
+                    </div>
+                </div>
                 <div class="flex my-6">
                     <div class="flex items-center mr-5">
                         <div class="relative">
@@ -35,28 +43,27 @@
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5">
                         </div>
                     </div>
-                    <div class="flex">
-                        @foreach($hotel->roomFacilities() as $facility)
-                        <div class="mx-4">
-                            <label for="{{$facility->id}}">{{$facility->title}}</label>
-                            <input type="checkbox" name="filters[]" value="{{$facility->id}}">
-                        </div>
-                        @endforeach
+                    <div class="flex mx-4">
+                        <select name="sort">
+                            <option selected name="sort" value="title_asc">Сортировать по:</option>
+                            <option name="sort" value="title_asc">Алфавиту&uarr;</option>
+                            <option name="sort" value="price_asc">Цене&uarr;</option>
+                            <option name="sort" value="type_asc">Типу&uarr;</option>
+                            <option name="sort" value="title_desc">Алфавиту&#8595</option>
+                            <option name="sort" value="price_desc">Цене&#8595</option>
+                            <option name="sort" value="type_desc">Типу&#8595</option>
+                        </select>
                     </div>
                     <div>
                         <x-the-button type="submit" class=" h-full w-full">Загрузить номера</x-the-button>
                     </div>
                 </div>
             </form>
-            @if($startDate && $endDate)
                 <div class="flex flex-col w-full lg:w-4/5">
                     @foreach($rooms as $room)
                             <x-rooms.room-list-item :room="$room" class="mb-4"/>
                     @endforeach
                 </div>
-            @else
-                <div></div>
-            @endif
         </div>
     </div>
 </x-app-layout>
