@@ -22,7 +22,12 @@ class HotelController extends Controller
         $rooms = [];
 
         if (($request['start_date'])) {
-            $rooms = $hotel->filterRooms($request['start_date'], $request['end_date'], $request['filters']);
+            $rooms = $hotel->filterRooms(
+                from: $request['start_date'],
+                to: $request['end_date'],
+                sort: $request['sort'],
+                filters: $request['filters']
+            );
         }
 
         return view('hotels.show', ['hotel' => $hotel, 'rooms' => $rooms]);

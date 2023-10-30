@@ -12,6 +12,9 @@
                <span>•</span>floor {{ $room->floor_area }}
             </div>
             <div>
+                <span>•</span>type {{ $room->type }}
+            </div>
+            <div>
                     @foreach($room->facilities as $facility)
                         <span>• {{ $facility->title }} </span>
                     @endforeach

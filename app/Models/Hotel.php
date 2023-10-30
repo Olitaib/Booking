@@ -34,12 +34,13 @@ class Hotel extends Model
     /**
      * @param string $from
      * @param string $to
+     * @param string $sort
      * @param ?array $filters
      *
      * @return Collection<Room> // include Room Model class above using `use App..\Room `
      */
 
-    public function filterRooms(string $from, string $to, ?array $filters): Collection
+    public function filterRooms(string $from, string $to, string $sort, ?array $filters): Collection
     {
         $rooms = Room::query()
             ->select('r.*') // select only columns from rooms table (aliased as r) wildcard * for all columns
@@ -64,8 +65,11 @@ class Hotel extends Model
                 ->havingRaw("COUNT(DISTINCT f.id) = $count"); // include rooms with all selected facilities only
         }
 
+        $sort = explode('_', $sort);
+
         return $rooms
             ->distinct() // remove duplicates
+            ->orderBy($sort[0], $sort[1])
             ->get();
     }
 
