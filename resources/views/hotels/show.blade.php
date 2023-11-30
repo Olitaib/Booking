@@ -1,20 +1,15 @@
-@php
-    $startDate = request()->get('start_date', \Carbon\Carbon::now()->format('Y-m-d'));
-    $endDate = request()->get('end_date', \Carbon\Carbon::now()->addDay()->format('Y-m-d'));
-@endphp
-
 <x-app-layout>
     <div class="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
         <div class="flex flex-wrap mb-12">
             <div class="w-full flex justify-start md:w-1/3 mb-8 md:mb-0">
-                <img class="h-full rounded-l-sm" src="{{ $hotel->poster_url }}" alt="Room Image">
+                <img class="h-full rounded-l-sm" src="{{ $hotel->getPoster_url() }}" alt="Room Image">
             </div>
             <div class="w-full md:w-2/3 px-4">
-                <div class="text-2xl font-bold">{{ $hotel->name }}</div>
+                <div class="text-2xl font-bold">{{ $hotel->getTitle() }}</div>
                 <div class="flex items-center">
-                    {{ $hotel->address }}
+                    {{ $hotel->getAddress() }}
                 </div>
-                <div>{{ $hotel->description }}</div>
+                <div>{{ $hotel->getDescription() }}</div>
             </div>
         </div>
         <div class="flex flex-col">
@@ -23,7 +18,7 @@
                 <div class="flex my-6">
                     <div class="text-xl ">Удобства:</div>
                     <div>
-                        @foreach($hotel->roomFacilities() as $facility)
+                        @foreach($hotel->getRoomFacilities() as $facility)
                                 <input class="ml-4" type="checkbox" name="filters[]" value="{{$facility->id}}">
                                 <label for="{{$facility->id}}">{{$facility->title}}</label>
                         @endforeach
@@ -32,13 +27,13 @@
                 <div class="flex my-6">
                     <div class="flex items-center mr-5">
                         <div class="relative">
-                            <input name="start_date" min="{{ date('Y-m-d') }}" value="{{ $startDate }}"
+                            <input name="start_date" min="{{ date('Y-m-d') }}" value="{{ $hotel->getStart_date() }}"
                                    placeholder="Дата заезда" type="date"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5">
                         </div>
                         <span class="mx-4 text-gray-500">по</span>
                         <div class="relative">
-                            <input name="end_date" type="date" min="{{ date('Y-m-d') }}" value="{{ $endDate }}"
+                            <input name="end_date" type="date" min="{{ date('Y-m-d') }}" value="{{ $hotel->getEnd_date() }}"
                                    placeholder="Дата выезда"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5">
                         </div>
@@ -60,7 +55,7 @@
                 </div>
             </form>
                 <div class="flex flex-col w-full lg:w-4/5">
-                    @foreach($rooms as $room)
+                    @foreach($hotel->getFilterRooms() as $room)
                             <x-rooms.room-list-item :room="$room" class="mb-4"/>
                     @endforeach
                 </div>
