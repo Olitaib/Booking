@@ -16,10 +16,10 @@
             <div class="flex my-6">
                 <div class="flex mr-5">
                     <select name="sort">
-                        <option selected name="sort" value="name_asc">Сортировать по:</option>
-                        <option name="sort" value="name_asc">Алфавиту&uarr;</option>
+                        <option selected name="sort" value="title_asc">Сортировать по:</option>
+                        <option name="sort" value="title_asc">Алфавиту&uarr;</option>
                         <option name="sort" value="minPrice_asc">Цене&uarr;</option>
-                        <option name="sort" value="name_desc">Алфавиту&#8595</option>
+                        <option name="sort" value="title_desc">Алфавиту&#8595</option>
                         <option name="sort" value="maxPrice_desc">Цене&#8595</option>
                     </select>
                 </div>
