@@ -3,7 +3,7 @@
     <div class="w-full flex flex-col justify-between p-4">
         <div>
             <a class="block text-grey-darkest mb-2 font-bold"
-               href="{{ route('hotels.show', ['id' => $hotel]) }}">{{ $hotel->name }}</a>
+               href="{{ route('hotels.show', ['id' => $hotel->id]) }}">{{ $hotel->title }}</a>
             <div class="text-xs">
                 {{ $hotel->address }}
             </div>
@@ -12,7 +12,6 @@
             <span class="text-2xl text-grey-darkest">от {{ $hotel->rooms->min('price') }}р.</span>
             <span class="text-lg"> за ночь</span>
         </div>
-        @if($hotel->facilities->isNotEmpty())
             <div class="flex items-center py-2">
                 @foreach($hotel->facilities as $facility)
                     <div class="pr-2 text-xs">
@@ -20,9 +19,8 @@
                     </div>
                 @endforeach
             </div>
-        @endif
         <div class="flex justify-end">
-            <x-link-button href="{{ route('hotels.show', ['id' => $hotel]) }}">Подробнее</x-link-button>
+            <x-link-button href="{{ route('hotels.show', ['id' => $hotel->id]) }}">Подробнее</x-link-button>
         </div>
     </div>
 </div>
