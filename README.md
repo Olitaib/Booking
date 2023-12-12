@@ -1,10 +1,32 @@
-PHP:8.1, Laravel: 10.
+Booking Project with PHP 8.2.13 && Laravel Framework 10.23.1
 
-Used packages: Laravel Breeze, Voyager.
+Used packages:
 
-To start: 
-1. sail up && npm run build && npm run dev
-2. sail artisan migrate
-3. sail artisan voyager:admin your@email.com --create
+    for user - laravel/breeze
+    for admin - tcg/voyager
+    for validation - respect/validation
+
+Commands:
+
+    To start
+    
+        make start
+        make migration
+        make seed
+    
+    To up:
+    
+        make up
+    
+    To stop:
+    
+        make stop
+    
+    To create admin:
+    
+        sail artisan voyager:admin your@email.com --create
+
+
+
 
 
