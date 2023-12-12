@@ -41,4 +41,20 @@ class Validator
         return false;
     }
 
+    public function booking(array $bookingsData): bool
+    {
+        $validation = v::key('id', v::intVal()->bookingExist(), false)
+            ->key('room_id', v::intVal()->roomExist(), false)
+            ->key('start_date', v::date('Y-m-d'), false)
+            ->key('end_date', v::date('Y-m-d'), false);
+        try {
+            $validation->assert($bookingsData);
+        } catch (NestedValidationException $exception) {
+            $this->errors = $exception->getMessages();
+            return true;
+        }
+
+        return false;
+    }
+
 }
