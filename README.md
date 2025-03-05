@@ -11,8 +11,6 @@ Commands:
     To start
     
         make start
-        make migration
-        make seed
     
     To up:
     

@@ -1,23 +1,21 @@
 start:
 	cp .env.example .env
-	composer install
-	./vendor/bin/sail up -d
-	npm install
-	npm run build
-
-migration:
-	./vendor/bin/sail artisan migrate
-
-seed:
-	./vendor/bin/sail artisan db:seed
+	docker compose run --rm booking composer install
+	docker compose up -d
+	docker compose run --rm booking npm install
+	docker compose run --rm booking npm run build
+	docker compose run booking php artisan migrate
+	docker compose run booking php artisan db:seed
+	docker compose run --rm booking php artisan key:generate
+	docker compose run --rm booking php artisan optimize
 
 up:
-	./vendor/bin/sail up -d
+	docker compose up -d
 
 stop:
-	./vendor/bin/sail down
+	docker compose down
 
 restart:
-	./vendor/bin/sail down
-	./vendor/bin/sail up -d
+	docker compose down
+	docker compose up -d
 
